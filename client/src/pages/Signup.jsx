@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FormField } from "../components";
 import axios from "axios";
-
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { signup, login } from "../utils";
 import { useUser } from "../context/UserContext";
@@ -14,6 +14,11 @@ const Signup = () => {
     email: "",
     password: "",
   });
+
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const handlePasswordVisible = () => {
+    setPasswordVisible(!passwordVisible);
+  };
 
   const [auth, setAuth] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
@@ -69,7 +74,7 @@ const Signup = () => {
 
   return (
     <form className="md:mt-16 max-w-3xl mx-auto" onSubmit={handleSubmit}>
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col ">
         {!isLogin && (
           <FormField
             labelName="User Name"
@@ -88,17 +93,26 @@ const Signup = () => {
           value={form.email}
           handleChange={handleChange}
         />
-        <FormField
-          labelName="Password"
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          handleChange={handleChange}
-        />
+        <div className="relative ">
+          <FormField
+            labelName="Password"
+            type={passwordVisible ? "password" : "text"}
+            name="password"
+            placeholder="Password"
+            value={form.password}
+            handleChange={handleChange}
+          />
+          <span
+            className="absolute right-6 top-[52px] text-center text-blue-500"
+            onClick={handlePasswordVisible}
+          >
+            {passwordVisible ? <AiFillEyeInvisible /> : <AiFillEye />}
+          </span>
+        </div>
+
         <button
           type="submit"
-          className="mt-3 text-white bg-[#6469ff] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center cursor-pointer"
+          className="mt-3 text-white bg-[#537FE7] hover:bg-[#4163b3] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center cursor-pointer"
         >
           {isLogin ? "Login" : "Signup"}
         </button>
@@ -107,7 +121,7 @@ const Signup = () => {
           onClick={handleShow}
           className="mt-3  text-[#537FE7] hover:text-white hover:bg-[#537FE7] font-medium w-fit ml-auto text-end border cursor-pointer px-4 py-2 rounded-md "
         >
-          {isLogin ? "Signup?" : "Login"}
+          {isLogin ? "Signup ?" : "Login ?"}
         </p>
       </div>
     </form>
