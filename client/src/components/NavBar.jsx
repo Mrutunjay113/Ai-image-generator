@@ -13,13 +13,28 @@ import { useUser } from "../context/UserContext";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { user, setUserData, logout } = useUser();
-  console.log(user.auth);
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
   const handleLogout = () => {
+    localStorage.removeItem("username");
+    localStorage.removeItem("auth");
+    localStorage.removeItem("email");
     setUserData.logout();
   };
+
+  useEffect(() => {
+    // Retrieve data from localStorage when the component mounts
+    const storedUsername = localStorage.getItem("username");
+    const storedEmail = localStorage.getItem("email");
+    const storedAuth = localStorage.getItem("auth");
+
+    if (storedAuth === "true") {
+      // Set user data if auth exists in localStorage
+      setUserData(storedUsername, true, storedEmail);
+    }
+  }, []);
 
   return (
     <nav className="p-4 lg:p-4 flex ">
@@ -32,7 +47,7 @@ const NavBar = () => {
 
       {/* Right Side: Links and Dropdown */}
 
-      <div className="flex lg:space-x-10 space-x-2">
+      <div className="flex lg:space-x-6 space-x-2 ">
         {user.auth && (
           <Link
             to="/create-post"
@@ -52,17 +67,18 @@ const NavBar = () => {
 
         {/* Logout Dropdown */}
         {user.auth ? (
-          <div className="lg:text-base text-sm relative text-left lg:px-4 px-1 py-2 border border-orange-600 bg-transparent transition-all hover:bg-orange-600 hover:text-white rounded-full">
-            <button onClick={toggleDropdown} className="flex ml-2">
-              {user.username}
+          <div className=" lg:text-base text-sm relative text-left lg:px-6 px-1 py-2 border border-orange-600 bg-transparent transition-all hover:bg-orange-600 hover:text-white rounded-full">
+            <button onClick={toggleDropdown} className="flex items-center">
+              <span className="overflow-hidden overflow-ellipsis whitespace-nowrap max-w-[160px] lg:max-w-[200px]">
+                {user?.username.split(" ")[0]}
+              </span>
               <span className="my-auto ml-2">
                 <AiFillCaretDown />
               </span>
             </button>
             {isOpen && (
-              <div className="origin-top-right absolute lg:right-0 mt-4 w-20 lg:w-30 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+              <div className="origin-top-right absolute text-center lg:right-4 mt-4 w-28 md:w-30 rounded-md shadow-lg bg-white text-red-600 ring-1 ring-black ring-opacity-5">
                 <div
-                  className="py-1"
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="options-menu"
@@ -70,7 +86,7 @@ const NavBar = () => {
                   <Link
                     onClick={handleLogout}
                     to="/"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block px-4 py-2 text-sm text-teal-200-800  rounded-md"
                   >
                     Logout
                   </Link>

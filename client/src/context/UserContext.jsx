@@ -21,6 +21,7 @@ export function UserProvider({ children }) {
   };
   const logout = () => {
     // Reset user state to default values
+    
     setUser(initialUserState);
   };
 

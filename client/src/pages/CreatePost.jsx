@@ -74,12 +74,13 @@ const CreatePost = () => {
   };
 
   useEffect(() => {
-    setForm({ ...form, name: user.username });
+    const storedUsername = localStorage.getItem("username");
+    setForm({ ...form, name: storedUsername });
   }, []);
   return (
     <section className="max-w-7xl mx-auto">
       <div>
-        <h1 className="font-extrabold orange_gradient text-[32px] uppercase ">
+        <h1 className="font-extrabold orange_gradient head_text uppercase ">
           Create
         </h1>
         <p className="desc">

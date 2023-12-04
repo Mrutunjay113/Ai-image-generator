@@ -37,6 +37,9 @@ const Signup = () => {
 
       if (data?.status === 200) {
         setUserData(usernameData, true, emailData);
+        localStorage.setItem("username", usernameData);
+        localStorage.setItem("auth", true);
+        localStorage.setItem("email", emailData);
         // Navigate to the desired page upon successful login.
         navigate("/");
         console.log("redirecting to home...");
@@ -59,6 +62,9 @@ const Signup = () => {
       const emailData = response?.data?.data?.email;
       if (response?.status === 201) {
         setUserData(usernameData, true, emailData);
+        localStorage.setItem("username", usernameData);
+        localStorage.setItem("auth", true);
+        localStorage.setItem("email", emailData);
         // Navigate to the desired page upon successful login.
         navigate("/");
         console.log("redirecting to home...");
@@ -96,7 +102,7 @@ const Signup = () => {
         <div className="relative ">
           <FormField
             labelName="Password"
-            type={passwordVisible ? "password" : "text"}
+            type={passwordVisible ? "text" : "password"}
             name="password"
             placeholder="Password"
             value={form.password}
@@ -106,7 +112,7 @@ const Signup = () => {
             className="absolute right-6 top-[52px] text-center text-blue-500"
             onClick={handlePasswordVisible}
           >
-            {passwordVisible ? <AiFillEyeInvisible /> : <AiFillEye />}
+            {passwordVisible ? <AiFillEye /> : <AiFillEyeInvisible />}
           </span>
         </div>
 

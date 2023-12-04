@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Card } from "../components";
 import UserCard from "../components/userCard";
 import { useUser } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
@@ -17,22 +16,21 @@ const Mypost = () => {
     }
   };
 
-  const fetchUserData = async () => {
+  const fetchUserData = async (username) => {
     try {
       const response = await axios.post(
         "http://localhost:8080/api/v1/post/mypost",
-        { name: user.username }
+        { name: username }
       );
       const data = response.data.data;
       setUserPost(data);
     } catch (error) {}
   };
   useEffect(() => {
-    if (!user.auth) {
-      navigate("/signup");
-    }
-
-    fetchUserData();
+    const username = localStorage.getItem("username");
+    const auth = localStorage.getItem("auth");
+    if (auth) fetchUserData(username);
+    else navigate("/signup");
   }, []);
   return (
     <>
@@ -45,9 +43,9 @@ const Mypost = () => {
 
         {/* <div>{<RenderCards data={userData} />}</div>
          */}
-        <div className="mt-8 lg:flex gap-4">
+        <div className="mt-8 md:flex md:gap-4 ">
           {userPost.length > 0 ? (
-            <RenderCards data={userPost} />
+            <RenderCards data={userPost} key={userPost.id} />
           ) : (
             <h1 className="orange_gradient text-xl font-bold text-left">
               No Post Found

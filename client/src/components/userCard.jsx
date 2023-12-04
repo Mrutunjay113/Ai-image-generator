@@ -27,7 +27,7 @@ const Card = ({ _id, name, photo, prompt }) => {
   return (
     <>
       <div
-        className="rounded-xl group relative shadow-card hover:shadow-cardhover card "
+        className="rounded-xl md:mb-0 mb-4 group relative shadow-card hover:shadow-cardhover card "
         key={_id}
       >
         <img
