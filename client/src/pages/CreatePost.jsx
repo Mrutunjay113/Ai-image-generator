@@ -22,7 +22,7 @@ const CreatePost = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          "https://ai-image-generator-apii-tau.vercel.app//api/v1/post",
+          "https://ai-image-generator-apii-tau.vercel.app/api/v1/post",
           {
             method: "POST",
             headers: {
@@ -56,7 +56,7 @@ const CreatePost = () => {
       try {
         setGeneratingImg(true);
         const response = await fetch(
-          "https://ai-image-generator-apii-tau.vercel.app//api/v1/dalle",
+          "https://ai-image-generator-apii-tau.vercel.app/api/v1/dalle",
           {
             method: "POST",
             headers: {

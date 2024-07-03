@@ -18,7 +18,7 @@ export async function downloadImage(_id, photo) {
 export async function signup(form) {
   try {
     const response = await axios.post(
-      "https://ai-image-generator-apii-tau.vercel.app//api/v1/signup",
+      "https://ai-image-generator-apii-tau.vercel.app/api/v1/signup",
       form
     );
     // Redirect to login page
@@ -36,7 +36,7 @@ export async function signup(form) {
 export async function login(form) {
   try {
     const response = await axios.post(
-      "https://ai-image-generator-apii-tau.vercel.app//api/v1/login",
+      "https://ai-image-generator-apii-tau.vercel.app/api/v1/login",
       form
     );
     const data = response;

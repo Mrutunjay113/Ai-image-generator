@@ -24,7 +24,7 @@ const Home = () => {
       setloading(true);
       try {
         const response = await fetch(
-          "https://ai-image-generator-apii-tau.vercel.app//api/v1/post",
+          "https://ai-image-generator-apii-tau.vercel.app/api/v1/post",
           {
             method: "GET",
             headers: {

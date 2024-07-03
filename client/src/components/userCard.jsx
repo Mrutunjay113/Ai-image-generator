@@ -8,7 +8,7 @@ const Card = ({ _id, name, photo, prompt }) => {
     console.log(_id);
     try {
       const response = await fetch(
-        "https://ai-image-generator-apii-tau.vercel.app//api/v1/post",
+        "https://ai-image-generator-apii-tau.vercel.app/api/v1/post",
         {
           method: "DELETE",
           headers: {

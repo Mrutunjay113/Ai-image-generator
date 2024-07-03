@@ -19,7 +19,7 @@ const Mypost = () => {
   const fetchUserData = async (username) => {
     try {
       const response = await axios.post(
-        "https://ai-image-generator-apii-tau.vercel.app//api/v1/post/mypost",
+        "https://ai-image-generator-apii-tau.vercel.app/api/v1/post/mypost",
         { name: username }
       );
       const data = response.data.data;
