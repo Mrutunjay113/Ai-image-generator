@@ -7,13 +7,16 @@ const Card = ({ _id, name, photo, prompt }) => {
   const handleDelete = async (_id) => {
     console.log(_id);
     try {
-      const response = await fetch("http://localhost:8080/api/v1/post", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ _id }),
-      });
+      const response = await fetch(
+        "https://ai-image-generator-apii-tau.vercel.app//api/v1/post",
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ _id }),
+        }
+      );
       if (response.ok) {
         window.location.reload();
         console.log("deleted", _id);

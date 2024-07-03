@@ -18,7 +18,7 @@ export async function downloadImage(_id, photo) {
 export async function signup(form) {
   try {
     const response = await axios.post(
-      "http://localhost:8080/api/v1/signup",
+      "https://ai-image-generator-apii-tau.vercel.app//api/v1/signup",
       form
     );
     // Redirect to login page
@@ -26,7 +26,6 @@ export async function signup(form) {
     if (data.status === 201) {
       return data;
     } else {
-    
       return null;
     }
   } catch (error) {
@@ -37,7 +36,7 @@ export async function signup(form) {
 export async function login(form) {
   try {
     const response = await axios.post(
-      "http://localhost:8080/api/v1/login",
+      "https://ai-image-generator-apii-tau.vercel.app//api/v1/login",
       form
     );
     const data = response;
